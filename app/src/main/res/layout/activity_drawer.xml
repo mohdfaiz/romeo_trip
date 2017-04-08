@@ -1,0 +1,208 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorPrimary"
+            android:gravity="center"
+            app:theme="@style/AppTheme.PopupOverlay">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginRight="@dimen/_10sdp">
+
+                <TextView
+                    android:id="@+id/toolbar_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="@string/app_name"
+                    android:gravity="center_vertical"
+                    android:layout_gravity="center"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/_16sdp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/_8sdp">
+
+                    <TextView
+                        android:id="@+id/yourlocationtxt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_14sdp"
+                        android:singleLine="true"
+                        android:gravity="center"/>
+
+                    <TextView
+                        android:id="@+id/currentlocation"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/_14sdp"
+                        android:singleLine="true"
+                        android:gravity="center"
+                        android:layout_marginTop="@dimen/_2sdp" />
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <ImageButton
+                android:id="@+id/search"
+                android:layout_width="@dimen/_45sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_gravity="right"
+                android:layout_marginRight="@dimen/_6sdp"
+                android:background="@drawable/searchbg"
+                android:padding="@dimen/_5sdp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/search_icon" />
+
+
+        </android.support.v7.widget.Toolbar>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <AutoCompleteTextView
+                android:id="@+id/searchHotel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_5sdp"
+                android:layout_weight="0.9"
+                android:background="@drawable/rounded4"
+                android:hint="Search by Restaurant Name or Area"
+                android:textStyle="italic"
+                android:padding="@dimen/_9sdp"
+                android:singleLine="true"
+                android:textColor="#d7c6c6"
+                android:textColorHint="#d7c6c6"
+                android:textCursorDrawable="@drawable/cursor"
+                android:textSize="@dimen/_11sdp" />
+
+            <ImageButton
+                android:id="@+id/clickSearch"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="0.1"
+                android:background="@color/transperent"
+                android:padding="@dimen/_4sdp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/search_icon" />
+        </LinearLayout>
+
+
+        <android.support.v4.widget.DrawerLayout
+            android:id="@+id/drawer_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:orientation="horizontal"
+                    android:weightSum="3">
+
+                    <Button
+                        android:id="@+id/homebtn"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@color/colorPrimary"
+                        android:text="HOME"
+                        android:textSize="@dimen/_12sdp"
+                        android:textColor="#ffffff" />
+
+                    <Button
+                        android:id="@+id/explorebtn"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@color/colorPrimary"
+                        android:text="EXPLORE"
+                        android:textSize="@dimen/_12sdp"
+                        android:textColor="#ffffff" />
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@color/colorPrimary">
+
+                        <Button
+                            android:id="@+id/inboxbtn"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@android:color/transparent"
+                            android:text="INBOX"
+                            android:textSize="@dimen/_12sdp"
+                            android:textColor="#ffffff" />
+
+                        <TextView
+                            android:id="@+id/inboxcounter"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_alignParentTop="true"
+                            android:layout_marginTop="@dimen/_6sdp"
+                            android:layout_marginRight="@dimen/_18sdp"
+                            android:textColor="#ffffff"
+                            android:textSize="@dimen/_10sdp" />
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+                <FrameLayout
+                    android:id="@+id/container"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+            </LinearLayout>
+
+            <!--<include layout="@layout/drawer_lay" />-->
+        </android.support.v4.widget.DrawerLayout>
+    </LinearLayout>
+
+
+</RelativeLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

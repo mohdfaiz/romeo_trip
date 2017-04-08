@@ -10,8 +10,10 @@ import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import dmax.dialog.SpotsDialog;
@@ -21,6 +23,7 @@ import romeotrip.utils.Util;
 public abstract class BaseApi {
 
     public abstract void responseApi(JSONObject response);
+    public abstract void responseArrayApi(JSONArray response);
 
     public abstract void errorApi(VolleyError error);
 
@@ -135,4 +138,63 @@ public abstract class BaseApi {
             errorApi(new VolleyError("Check Internet Connection."));
         }
     }
+
+    public void getJsonApiArray(final Context context, String url, final String tag, final boolean bool) {
+        if (Util.isNetConnected(context)) {
+            final AlertDialog dialog = new SpotsDialog(context);
+            if (bool) {
+                dialog.setCancelable(false);
+                dialog.show();
+            }
+
+            final Request.Priority mPriority = Request.Priority.HIGH;
+
+//            final JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET, url, new Response.Listener<JSONObject>() {
+            final JsonArrayRequest jsonArrReq = new JsonArrayRequest(Request.Method.GET, url, new Response.Listener<JSONArray>() {
+
+//                final JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET, url, new Response.Listener<JSONObject>() {
+
+
+                    @Override
+                public void onResponse(JSONArray response) {
+                    Log.e(tag, response.toString());
+                    if (bool) {
+//                        if ((pDialog != null) && pDialog.isShowing()) {
+//                            pDialog.dismiss();
+//                        }
+                        if ((dialog != null) && dialog.isShowing()) {
+                            dialog.dismiss();
+                        }
+                    }
+//                    responseApi(response);
+                    responseArrayApi(response);
+                }
+            }, new Response.ErrorListener() {
+
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Log.e(tag, "Error: " + error.getMessage());
+                    if (bool) {
+//                        pDialog.dismiss();
+                        dialog.dismiss();
+                    }
+                    errorApi(error);
+                }
+            }) {
+                @Override
+                public Priority getPriority() {
+                    return mPriority;
+                }
+
+            };
+
+            jsonArrReq.setRetryPolicy(new DefaultRetryPolicy(3 * 60000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+            AppController.getInstance().addToRequestQueue(jsonArrReq);
+        }
+        else {
+            errorApi(new VolleyError("Check Internet Connection."));
+        }
+    }
+
+
 }

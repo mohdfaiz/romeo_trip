@@ -8,9 +8,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.android.volley.VolleyError;
 import com.example.mohdfaiz.romeotrip.R;
+import com.vstechlab.easyfonts.EasyFonts;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -18,14 +20,16 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import romeotrip.adapter.PlacesAdapter;
 import romeotrip.api.GetPlacesApi;
 import romeotrip.data.PlacesAroundData;
+import romeotrip.utils.CustomPreference;
 
 public class HomeFragment extends Fragment {
 
-    RecyclerView placesList;
+    RecyclerView placesListView;
     LinearLayoutManager manager;
-    public ArrayList<PlacesAroundData> placesAroundDatas = new ArrayList<>();
+    Button user_location, header_text;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -36,61 +40,60 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        placesList = (RecyclerView) view.findViewById(R.id.placesList);
+        header_text = (Button) view.findViewById(R.id.header_text);
+        user_location = (Button) view.findViewById(R.id.user_location);
+        header_text.setTypeface(EasyFonts.caviarDreams(getActivity()));
+        user_location.setTypeface(EasyFonts.caviarDreams(getActivity()));
+        String current_loc = CustomPreference.readString(getActivity(), CustomPreference.CITY, "") + ", " + CustomPreference.readString(getActivity(), CustomPreference.STATE, "")  + ", " +  CustomPreference.readString(getActivity(), CustomPreference.COUNTRY, "");
+        user_location.setText("Your location is : " + current_loc);
+
+        placesListView = (RecyclerView) view.findViewById(R.id.placesListView);
         manager = new LinearLayoutManager(getActivity());
         manager.setOrientation(LinearLayoutManager.VERTICAL);
-        placesList.setLayoutManager(manager);
+        placesListView.setLayoutManager(manager);
+
+        getPlacesApi();
     }
 
     ArrayList<PlacesAroundData> allPlacesList = new ArrayList<>();
+    public void getPlacesApi() {
+        new GetPlacesApi(getActivity()) {
+            @Override
+            public void responseApi(JSONObject response) {
+                super.responseApi(response);
+            }
 
-//    void getPlacesApi() {
-//        new GetPlacesApi(getActivity()) {
-//            @Override
-//            public void responseApi(JSONObject response) {
-//                super.responseApi(response);
-//
-//                try {
-//                    JSONObject header1 = response.getJSONObject("mohdfaiz.in");
-//                    String res_code = header1.getString("res_code");
-//                    String res_msg = header1.getString("res_msg");
-//
-//                    if (res_code.equals("1")) {
-//                        allAddList = new ArrayList<>();
-//                        JSONArray addressArray = header1.getJSONArray("CustomerAddress");
-//
-//                        for (int i = 0; i < addressArray.length(); i++) {
-//                            JSONObject obj = addressArray.getJSONObject(i);
-//                            PlacesAroundData item = new PlacesAroundData();
-//                            item.setId(obj.getString("id"));
-//                            item.setFull_name(obj.getString("full_name"));
-//                            item.setStreet(obj.getString("street"));
-//                            item.setContact_no(obj.getString("contact_no"));
-//                            item.setCity(obj.getString("city"));
-//                            item.setState(obj.getString("state"));
-//                            item.setCountry(obj.getString("country"));
-//
-//                            item.setZip(obj.getString("zip"));
-//                            item.setStatus(obj.getString("status"));
-//                            item.setAdd_date(obj.getString("add_date"));
-//                            item.setModify_date(obj.getString("modify_date"));
-//
-//                            item.setDefaultt(obj.getString("default"));
-//                            item.setAdd_type(obj.getString("add_type"));
-//                            item.setSelectorAdd(false);
-//
-//                            allAddList.add(item);
-//                        }
-//                    }
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//
-//            @Override
-//            public void errorApi(VolleyError error) {
-//                super.errorApi(error);
-//            }
-//        };
-//    }
+            @Override
+            public void responseArrayApi(JSONArray response) {
+                super.responseArrayApi(response);
+
+                try {
+
+//                    JSONArray details = response.getJSONArray("fearfighter");
+
+                    allPlacesList = new ArrayList<>();
+
+                    for (int i = 0; i < response.length(); i++) {
+                        JSONObject obj = response.getJSONObject(i);
+                        PlacesAroundData data = new PlacesAroundData();
+                        data.setCo(obj.getString("co"));
+                        data.setSt(obj.getString("st"));
+
+                        allPlacesList.add(data);
+                    }
+
+                    PlacesAdapter trigger = new PlacesAdapter(getActivity(), allPlacesList);
+                    placesListView.setAdapter(trigger);
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void errorApi(VolleyError error) {
+                super.errorApi(error);
+            }
+        };
+    }
 }

@@ -154,6 +154,8 @@ public class DashBoardActivity extends AppCompatActivity {
                     String countryName = addresses.get(0).getCountryName();
                     String landMark = addresses.get(0).getLocality();
 
+                    Log.e("cityName"," = " + cityName + ", " + stateName + ", " + countryName);
+
                     CustomPreference.writeString(this, CustomPreference.COUNTRY, String.valueOf(countryName));
                     CustomPreference.writeString(this, CustomPreference.STATE, String.valueOf(stateName));
                     CustomPreference.writeString(this, CustomPreference.CITY, String.valueOf(cityName));

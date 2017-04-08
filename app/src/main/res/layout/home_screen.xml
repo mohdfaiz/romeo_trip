@@ -16,18 +16,30 @@
             android:background="#000000" />
 
         <Button
+            android:id="@+id/user_location"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:background="@color/colorPrimary"
+            android:text="Your Current Location"
+            android:maxLines="2"
+            android:textAllCaps="false"
+            android:textSize="@dimen/_10sdp"
+            android:padding="@dimen/_10sdp"
+            android:textColor="#ffffff" />
+
+        <Button
             android:id="@+id/header_text"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/_30sdp"
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/_2sdp"
             android:background="@color/colorPrimary"
-            android:text="Places To Visit"
-            android:textSize="@dimen/_12sdp"
-            android:paddingTop="@dimen/_5sdp"
-            android:paddingBottom="@dimen/_5sdp"
-            android:paddingLeft="@dimen/_20sdp"
-            android:paddingRight="@dimen/_20sdp"
+            android:text="Places To Visit From Your Location"
+            android:textAllCaps="false"
+            android:textSize="@dimen/_10sdp"
+            android:padding="@dimen/_10sdp"
             android:textColor="#ffffff" />
 
         <RelativeLayout
@@ -35,20 +47,20 @@
             android:layout_height="match_parent">
 
             <android.support.v7.widget.RecyclerView
-                android:id="@+id/placesList"
+                android:id="@+id/placesListView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="@dimen/_3sdp" />
 
-            <TextView
-                android:id="@+id/no_message"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text=""
-                android:layout_marginTop="@dimen/_40sdp"
-                android:gravity="center"
-                android:textSize="@dimen/_15sdp"
-                android:textColor="#000000"/>
+            <!--<TextView-->
+                <!--android:id="@+id/no_message"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:text=""-->
+                <!--android:layout_marginTop="@dimen/_40sdp"-->
+                <!--android:gravity="center"-->
+                <!--android:textSize="@dimen/_15sdp"-->
+                <!--android:textColor="#000000"/>-->
 
         </RelativeLayout>
 

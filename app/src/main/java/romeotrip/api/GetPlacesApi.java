@@ -6,6 +6,7 @@ import android.util.Log;
 
 import com.android.volley.VolleyError;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -16,7 +17,7 @@ public class GetPlacesApi extends BaseApi {
 
         try {
 
-            getJsonApi(context, url, "GetPlacesApi", true);
+            getJsonApiArray(context, url, "GetPlacesApi", true);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -25,6 +26,11 @@ public class GetPlacesApi extends BaseApi {
 
     @Override
     public void responseApi(JSONObject response) {
+
+    }
+
+    @Override
+    public void responseArrayApi(JSONArray response) {
 
     }
 

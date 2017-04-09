@@ -68,9 +68,6 @@ public class HomeFragment extends Fragment {
                 super.responseArrayApi(response);
 
                 try {
-
-//                    JSONArray details = response.getJSONArray("fearfighter");
-
                     allPlacesList = new ArrayList<>();
 
                     for (int i = 0; i < response.length(); i++) {
@@ -78,6 +75,8 @@ public class HomeFragment extends Fragment {
                         PlacesAroundData data = new PlacesAroundData();
                         data.setCo(obj.getString("co"));
                         data.setSt(obj.getString("st"));
+                        data.setLat(obj.getString("lat"));
+                        data.setLon(obj.getString("lon"));
 
                         allPlacesList.add(data);
                     }

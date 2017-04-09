@@ -66,8 +66,7 @@ public class MainActivity extends AppCompatActivity {
         StaticItems.displayWidth = display.widthPixels;
 
         fragmentManager = getSupportFragmentManager();
-        if (!CustomPreference.readBoolean(MainActivity.this, CustomPreference.FIRST_TIME, false))
-            addFragment(new PagerFragment());
+        addFragment(new PagerFragment());
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
     }
@@ -80,6 +79,30 @@ public class MainActivity extends AppCompatActivity {
     public void replaceFragment(Fragment fragment) {
         currentFragment = fragment;
         fragmentManager.beginTransaction().replace(R.id.container, fragment).commit();
+    }
+
+    @Override
+    public void onBackPressed() {
+//        super.onBackPressed();
+        AlertDialog.Builder exitDialog = new AlertDialog.Builder(MainActivity.this);
+        exitDialog.setTitle("Exit");
+        exitDialog.setMessage("Do you want to exit?");
+        exitDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                finish();
+            }
+        });
+
+        exitDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        exitDialog.show();
     }
 
     @Override

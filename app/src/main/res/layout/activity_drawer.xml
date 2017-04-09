@@ -27,37 +27,37 @@
                     android:id="@+id/toolbar_title"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="@string/app_name"
-                    android:gravity="center_vertical"
                     android:layout_gravity="center"
+                    android:gravity="center_vertical"
+                    android:text="@string/app_name"
                     android:textColor="@android:color/white"
                     android:textSize="@dimen/_16sdp" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
                     android:layout_gravity="center"
-                    android:layout_marginTop="@dimen/_8sdp">
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/yourlocationtxt"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:maxLines="1"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/_14sdp"
-                        android:singleLine="true"
-                        android:gravity="center"/>
+                        android:textSize="@dimen/_14sdp" />
 
                     <TextView
                         android:id="@+id/currentlocation"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColor="@android:color/white"
-                        android:textSize="@dimen/_14sdp"
-                        android:singleLine="true"
+                        android:layout_marginTop="@dimen/_2sdp"
                         android:gravity="center"
-                        android:layout_marginTop="@dimen/_2sdp" />
+                        android:maxLines="1"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/_14sdp" />
                 </LinearLayout>
 
             </RelativeLayout>
@@ -71,8 +71,8 @@
                 android:background="@drawable/searchbg"
                 android:padding="@dimen/_5sdp"
                 android:scaleType="fitCenter"
-                android:src="@drawable/search_icon" />
-
+                android:src="@drawable/search_icon"
+                android:visibility="gone" />
 
         </android.support.v7.widget.Toolbar>
 
@@ -91,13 +91,13 @@
                 android:layout_weight="0.9"
                 android:background="@drawable/rounded4"
                 android:hint="Search by Restaurant Name or Area"
-                android:textStyle="italic"
                 android:padding="@dimen/_9sdp"
                 android:singleLine="true"
                 android:textColor="#d7c6c6"
                 android:textColorHint="#d7c6c6"
                 android:textCursorDrawable="@drawable/cursor"
-                android:textSize="@dimen/_11sdp" />
+                android:textSize="@dimen/_11sdp"
+                android:textStyle="italic" />
 
             <ImageButton
                 android:id="@+id/clickSearch"
@@ -135,8 +135,8 @@
                         android:layout_weight="1"
                         android:background="@color/colorPrimary"
                         android:text="HOME"
-                        android:textSize="@dimen/_12sdp"
-                        android:textColor="#ffffff" />
+                        android:textColor="#ffffff"
+                        android:textSize="@dimen/_12sdp" />
 
                     <Button
                         android:id="@+id/explorebtn"
@@ -145,8 +145,8 @@
                         android:layout_weight="1"
                         android:background="@color/colorPrimary"
                         android:text="EXPLORE"
-                        android:textSize="@dimen/_12sdp"
-                        android:textColor="#ffffff" />
+                        android:textColor="#ffffff"
+                        android:textSize="@dimen/_12sdp" />
 
                     <RelativeLayout
                         android:layout_width="0dp"
@@ -160,8 +160,8 @@
                             android:layout_height="match_parent"
                             android:background="@android:color/transparent"
                             android:text="INBOX"
-                            android:textSize="@dimen/_12sdp"
-                            android:textColor="#ffffff" />
+                            android:textColor="#ffffff"
+                            android:textSize="@dimen/_12sdp" />
 
                         <TextView
                             android:id="@+id/inboxcounter"
@@ -169,8 +169,8 @@
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
                             android:layout_alignParentTop="true"
-                            android:layout_marginTop="@dimen/_6sdp"
                             android:layout_marginRight="@dimen/_18sdp"
+                            android:layout_marginTop="@dimen/_6sdp"
                             android:textColor="#ffffff"
                             android:textSize="@dimen/_10sdp" />
                     </RelativeLayout>
@@ -184,7 +184,7 @@
 
             </LinearLayout>
 
-            <!--<include layout="@layout/drawer_lay" />-->
+            <include layout="@layout/drawer_lay" />
         </android.support.v4.widget.DrawerLayout>
     </LinearLayout>
 

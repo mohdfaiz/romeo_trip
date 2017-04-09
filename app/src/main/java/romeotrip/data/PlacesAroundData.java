@@ -6,13 +6,24 @@ public class PlacesAroundData {
 
     private String co;  //country
     private String st;  //state
-//    private String address;
-//    private String city;
-//    private String bgImage;
-//    private String logoImage;
-//    private String categeorImage;
-//    private String category;
-//    private String reedeem_point;
+    private String lat;
+    private String lon;
+
+    public String getLat() {
+        return lat;
+    }
+
+    public void setLat(String lat) {
+        this.lat = lat;
+    }
+
+    public String getLon() {
+        return lon;
+    }
+
+    public void setLon(String lon) {
+        this.lon = lon;
+    }
 
     public String getCo() {
         return co;

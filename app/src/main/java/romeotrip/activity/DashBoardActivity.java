@@ -15,6 +15,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.LocalBroadcastManager;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -55,11 +58,16 @@ public class DashBoardActivity extends AppCompatActivity {
         setContentView(R.layout.activity_drawer);
 
         final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
+        setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.setDrawerListener(toggle);
+        toggle.syncState();
 
         toolbar_title = (TextView) findViewById(R.id.toolbar_title);
         toolbar_title.setTypeface(EasyFonts.caviarDreams(DashBoardActivity.this));
@@ -91,7 +99,6 @@ public class DashBoardActivity extends AppCompatActivity {
     }
 
     public double latitude, longitude;
-
     public void fetchLocationLast() {
 
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -153,6 +160,7 @@ public class DashBoardActivity extends AppCompatActivity {
                     String stateName = addresses.get(0).getAdminArea();
                     String countryName = addresses.get(0).getCountryName();
                     String landMark = addresses.get(0).getLocality();
+                    String postal_code = addresses.get(0).getPostalCode();
 
                     Log.e("cityName"," = " + cityName + ", " + stateName + ", " + countryName);
 
@@ -165,6 +173,36 @@ public class DashBoardActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
             }
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+//        super.onBackPressed();
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        }
+        else {
+            AlertDialog.Builder exitDialog = new AlertDialog.Builder(DashBoardActivity.this);
+            exitDialog.setTitle("Exit");
+            exitDialog.setMessage("Do you want to exit?");
+            exitDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                    finish();
+                }
+            });
+
+            exitDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+
+            exitDialog.show();
         }
     }
 
